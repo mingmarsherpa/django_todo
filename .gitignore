@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+Pipfile.lock
+
+# Django
+*.sqlite3
+*.log
+media/
+staticfiles/
+*.pot
+*.py[cod]
+__pycache__/
+
+# MySQL credentials (if you store them separately)
+.env
+
+# IDEs
+.vscode/
+.idea/

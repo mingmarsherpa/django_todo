@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+    <h2>Task Manager</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Task</button>
+    </form>
+
+    {% if tasks %}
+    <ul>
+        {% for task in tasks %}
+        <li>{{ task.title }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a href="{% url 'logout' %}" class="link" style="background:#dc3545; color:white; padding:8px; border-radius:6px; text-decoration:none;">Logout</a>
+{% endblock %}
