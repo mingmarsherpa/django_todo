@@ -14,7 +14,7 @@ Manage your tasks, set deadlines, and keep track of your daily activities easily
 ## Features
 - Add, update, and delete tasks
 - Set deadlines for tasks
-- Mark tasks as completed
+- select if the task is completed or pending
 - View all tasks in a clean interface
 - User authentication (signup and login)
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import TaskForm,SignupForm
 from .models import Task
 from django.contrib.auth.decorators import login_required
@@ -34,15 +34,22 @@ def log_out(request):
     logout(request)
     return redirect('login')
 
-@login_required(login_url='login')
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    task.delete()
+    return redirect('add_task')
+
+@login_required
 def add_task(request):
     if request.method == 'POST':
         form=TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            task=form.save(commit=False)
+            task.user=request.user
+            task.save()
     else:
         form =TaskForm()
-    tasks=Task.objects.all()
+    tasks=Task.objects.filter(user=request.user)
     return render(request,'todoapp/Add_task.html',{'tasks':tasks,'form':form})
 
 
