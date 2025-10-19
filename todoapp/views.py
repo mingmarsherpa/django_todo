@@ -50,7 +50,22 @@ def add_task(request):
     else:
         form =TaskForm()
     tasks=Task.objects.filter(user=request.user)
-    return render(request,'todoapp/Add_task.html',{'tasks':tasks,'form':form})
+    tasks_pending=Task.objects.filter(task_status='pending',user=request.user)
+    tasks_completed=Task.objects.filter(user=request.user,task_status='completed')
+    return render(request,'todoapp/Add_task.html',{'tasks':tasks,'form':form,'tasks_pending':tasks_pending,'tasks_completed':tasks_completed})
 
+def update_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
 
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('add_task')
+    else:
+        form = TaskForm(instance=task)
+
+    return render(request, 'todoapp/Task.html', {'form': form})
+
+    
     

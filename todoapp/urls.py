@@ -5,5 +5,6 @@ urlpatterns = [
     path('login/', views.log_in, name='login'),       # Login page
     path('logout/', views.log_out, name='logout'),    # Logout
     path('', views.add_task, name='add_task'),            # Home page (requires login)
-    path('delete/<int:task_id>/',views.delete_task,name='delete')
+    path('delete/<int:task_id>/',views.delete_task,name='delete'),
+    path('update/<int:task_id>/', views.update_task, name='update'),
 ]
